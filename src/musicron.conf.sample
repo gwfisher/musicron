@@ -1,0 +1,11 @@
+---
+- name: "Anonradio"
+  time: "12:12-12:15"
+  service:
+    provider: "VLC"
+    url: "http://anonradio.net:8000/anonradio"
+    plugin: "vlc"
+
+
+  
+
