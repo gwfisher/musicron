@@ -6,7 +6,33 @@ class LoadYaml:
         self.confFile = confFile
 
         with open(confFile,'r') as file:
-            self.loadedConf = yaml.safe_load(file)
+            loadedConf = yaml.safe_load(file)
+            self.validate(loadedConf)
+    
+    def validate(self,confFile):
+
+        configBuf = { }
+        self.config = []
+
+        for conf in confFile:
+            if not conf['name']:
+                print("Item requires a name in configuration file")
+            else:
+                configBuf['name'] = conf['name']
+            if not conf['time']:
+                print("Item Requires a time")
+            else:
+                configBuf['time'] = conf['time']
+            if not conf['service']:
+                print("Item Requires Service")
+            else:
+                configBuf['service'] = conf['service']
+
+            self.config.append(configBuf)
+
+        return self.config
+        
+
 
 class Config:
     def __init__(self, name: str, time: str, service: dict):
@@ -23,14 +49,15 @@ class Service:
 class ConfigFile:
     def __init__(self, configFile):
         self.configs = []
-        with open (configFile,"r") as file:
-            data = yaml.safe_load(file)
-            for item in data:
-                if 'name' in item and 'time' in item and 'service' in item:
-                    service_data = item['service']
-                    service = Service(provider=service_data['provider'],url=service_data['url'],plugin=service_data['plugin'])
-                    config = Config(name=item['name'], time=item['time'], service=service)
-                    self.configs.append(config)
+        item = []
+
+        loadedConfig = LoadYaml(configFile) # Load YAML and begin validation
+
+        for loadedConfig.config in item:
+            service_data = item['service']
+            service = Service(provider=service_data['provider'],url=service_data['url'],plugin=service_data['plugin'])
+            config = Config(name=item['name'], time=item['time'], service=service)
+            self.configs.append(config)
                     
     def get_configs(self):
         return self.configs

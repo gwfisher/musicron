@@ -28,7 +28,6 @@ class MusicCronApp:
     def play(self,provider,URL):
         self.player_thread = PluginThread(self.plugins,provider,URL)
         self.player_thread.start()
-        self.player_thread.join()
 
     def stop(self,provider,URL):
         self.player_thread.stop()
@@ -43,7 +42,7 @@ class MusicCronApp:
         except FileNotFoundError:
             print("Config File Not Found")
 
-        config_file = ConfigFile(configPath)
+        config_file = ConfigFile(configPath) #start reading the config YAML file
         configs = config_file.get_configs()
 
         while(True):
@@ -69,9 +68,11 @@ class MusicCronApp:
                     runTime = playTime.split("-")
                     startTime = runTime[0]
                     endTime = runTime[1]
+                    print(startTime)
+                    print(endTime)
                 else:
                     startTime = playTime
-                
+
                 if startTime == currentTime or startTime == currentNow or startTime == currentTimeUTC or startTime == currentNowUTC:
                     print("Playing " + name + "at" + startTime)
                     self.play(provider,URL)
