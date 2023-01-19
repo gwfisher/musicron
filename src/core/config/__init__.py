@@ -11,10 +11,10 @@ class LoadYaml:
     
     def validate(self,confFile):
 
-        configBuf = { }
         self.config = []
 
         for conf in confFile:
+            configBuf = { }
             if not conf['name']:
                 print("Item requires a name in configuration file")
             else:
@@ -45,9 +45,9 @@ class Service:
         self.plugin = plugin
 
 class ConfigFile:
+
     def __init__(self, configFile):
         self.configs = []
-        item = []
 
         loadedConfig = LoadYaml(configFile) # Load YAML and begin validation
 
@@ -58,4 +58,5 @@ class ConfigFile:
             self.configs.append(config)
                     
     def get_configs(self):
+        print(self.configs[1].name)
         return self.configs
