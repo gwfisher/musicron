@@ -32,8 +32,6 @@ class LoadYaml:
 
         return self.config
         
-
-
 class Config:
     def __init__(self, name: str, time: str, service: dict):
         self.name = name
@@ -53,7 +51,7 @@ class ConfigFile:
 
         loadedConfig = LoadYaml(configFile) # Load YAML and begin validation
 
-        for loadedConfig.config in item:
+        for item in loadedConfig.config:
             service_data = item['service']
             service = Service(provider=service_data['provider'],url=service_data['url'],plugin=service_data['plugin'])
             config = Config(name=item['name'], time=item['time'], service=service)

@@ -37,13 +37,13 @@ class MusicCronApp:
         try:
             if os.path.isfile(configPath):
                 configPath = os.path.expanduser('~/.musicron.conf')
+
+                config_file = ConfigFile(configPath) #start reading the config YAML file
+                configs = config_file.get_configs()
             else:
                 configPath = 'musicron.conf.sample'
         except FileNotFoundError:
             print("Config File Not Found")
-
-        config_file = ConfigFile(configPath) #start reading the config YAML file
-        configs = config_file.get_configs()
 
         while(True):
             timeDate = TimeDate()
