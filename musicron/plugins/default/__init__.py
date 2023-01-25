@@ -1,4 +1,4 @@
-from main import PluginRegistry
+from core.plugin import PluginRegistry
 
 class Plugin:
     name = "general"

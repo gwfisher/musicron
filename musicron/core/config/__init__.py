@@ -49,7 +49,10 @@ class ConfigFile:
     def __init__(self, configFile):
         self.configs = []
 
-        loadedConfig = LoadYaml(configFile) # Load YAML and begin validation
+        try:
+            loadedConfig = LoadYaml(configFile) # Load YAML and begin validation
+        except FileNotFoundError:
+            print("Configuration file not found")
 
         for item in loadedConfig.config:
             service_data = item['service']
@@ -58,5 +61,4 @@ class ConfigFile:
             self.configs.append(config)
                     
     def get_configs(self):
-        print(self.configs[1].name)
         return self.configs

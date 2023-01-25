@@ -3,8 +3,7 @@ import psutil
 import os
 import subprocess
 import time
-from main import PluginRegistry
-
+from core.plugin import PluginRegistry
 
 class Plugin:
      name = "VLC"
@@ -21,9 +20,12 @@ class Plugin:
 
      def setup(self):
           if not self.__getProcess():
-               subprocess.Popen(["vlc"])
-               time.sleep(5)
-     
+               try:
+                    subprocess.Popen(["vlc"])
+                    time.sleep(5)
+               except FileNotFoundError:
+                    print("VLC Not installed")
+               
           bus = dbus.SessionBus()
           proxy = bus.get_object('org.mpris.MediaPlayer2.vlc','/org/mpris/MediaPlayer2')
           self.vlc = dbus.Interface(proxy, dbus_interface='org.mpris.MediaPlayer2.Player')
@@ -37,15 +39,5 @@ class Plugin:
      
      def Stop(self):
           self.vlc.Stop()
-
-
-
-
-
-      
-
-   
-
-      
 
 

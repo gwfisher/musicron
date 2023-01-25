@@ -14,7 +14,7 @@ import functools
 import os
 import time
 
-class MusicCronApp:
+class MusiCron:
     def __init__(self, plugins:list=[]):
 
         self.player_thread = None
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     
     path = "plugins"
     dir_list = os.listdir(path)
-    app = MusicCronApp(dir_list)
+    app = MusiCron(dir_list)
     app.run()
     
     
