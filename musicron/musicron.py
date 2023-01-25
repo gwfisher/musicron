@@ -21,7 +21,7 @@ class MusiCron:
 
         self.plugins = PluginRegistry()
         for plugin in plugins:
-            imported_module = importlib.import_module(plugin)
+            imported_module = importlib.import_module('plugins.' + plugin)
             imported_instance = imported_module.Plugin()
             self.plugins.register(imported_module.Plugin.name)(imported_instance.setup())
 
@@ -85,10 +85,10 @@ class MusiCron:
             time.sleep(60)
 
 if __name__ == "__main__":
-    
-    path = "plugins"
-    dir_list = os.listdir(path)
-    app = MusiCron(dir_list)
-    app.run()
-    
-    
+    path = os.path.join(os.path.dirname(__file__), 'plugins')
+    if os.path.isdir(path):
+        dir_list = os.listdir(path)
+        app = MusiCron(dir_list)
+        app.run()
+    else:
+        print("Plugins directory not found.")

@@ -2,8 +2,8 @@
 import sys
 import os
 
-sys.path.insert(0,'./plugins/')
-sys.path.insert(0,os.path.expanduser('~/.local/lib/plugins'))
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(script_dir, 'plugins'))
 
 class PluginRegistry:
     def __init__(self):
