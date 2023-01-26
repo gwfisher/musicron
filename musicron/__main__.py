@@ -8,7 +8,7 @@ from core.timedate import TimeDate
 from core.thread import PluginThread
 from core.plugin import PluginRegistry
 
-import importlib
+import importlib2
 import sys
 import functools
 import os
@@ -21,7 +21,7 @@ class MusiCron:
 
         self.plugins = PluginRegistry()
         for plugin in plugins:
-            imported_module = importlib.import_module('plugins.' + plugin)
+            imported_module = importlib2.import_module('plugins.' + plugin)
             imported_instance = imported_module.Plugin()
             self.plugins.register(imported_module.Plugin.name)(imported_instance.setup())
 
