@@ -3,7 +3,7 @@ import psutil
 import os
 import subprocess
 import time
-from core.plugin import PluginRegistry
+from musicron.core.plugin import PluginRegistry
 
 class Plugin:
      name = "VLC"

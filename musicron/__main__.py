@@ -3,10 +3,10 @@
 from datetime import datetime
 from dateutil import tz
 from pathlib import Path
-from core.config import ConfigFile,LoadYaml
-from core.timedate import TimeDate
-from core.thread import PluginThread
-from core.plugin import PluginRegistry
+from musicron.core.config import ConfigFile,LoadYaml
+from musicron.core.timedate import TimeDate
+from musicron.core.thread import PluginThread
+from musicron.core.plugin import PluginRegistry
 
 import importlib2
 import sys
@@ -21,7 +21,7 @@ class MusiCron:
 
         self.plugins = PluginRegistry()
         for plugin in plugins:
-            imported_module = importlib2.import_module('plugins.' + plugin)
+            imported_module = importlib2.import_module('musicron.plugins.' + plugin)
             imported_instance = imported_module.Plugin()
             self.plugins.register(imported_module.Plugin.name)(imported_instance.setup())
 
